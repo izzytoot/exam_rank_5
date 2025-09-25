@@ -65,8 +65,8 @@ vect2 vect2::operator+ (const vect2& other) const{
 }
 
 vect2& vect2::operator-= (const vect2& other){
-    this->_vec[0] = other._vec[0];
-    this->_vec[1] = other._vec[1];   
+    this->_vec[0] -= other._vec[0];
+    this->_vec[1] -= other._vec[1];   
     return *this;
 }
 
@@ -77,8 +77,14 @@ vect2 vect2::operator- (const vect2& other) const{
 }
 
 vect2& vect2::operator*= (const vect2& other){
-    this->_vec[0] = other._vec[0];
-    this->_vec[1] = other._vec[1];
+    this->_vec[0] *= other._vec[0];
+    this->_vec[1] *= other._vec[1];
+    return *this;
+}
+
+vect2& vect2::operator*= (int n){
+    this->_vec[0] *= n;
+    this->_vec[1] *= n;
     return *this;
 }
 
@@ -88,13 +94,58 @@ vect2 vect2::operator* (const vect2& other) const{
     return vect2(x, y);
 }
 
+vect2 vect2::operator* (int n) const{
+    int x = this->_vec[0] * n;
+    int y = this->_vec[1] * n;
+    return vect2(x, y);
+}
+
 // OPERATORS: ==, !=
 
 bool vect2::operator== (const vect2& other){
-    return ((this->_vec[0] == other._vec[0]) 
-            && (this->_vec[1] == other._vec[1]));
+    if ((this->_vec[0] == other._vec[0]) && (this->_vec[1] == other._vec[1]))
+        return true;
+    return false;
 }
 
 bool vect2::operator!= (const vect2& other){
-    return !(this == &other);
+    if ((this->_vec[0] != other._vec[0]) && (this->_vec[1] != other._vec[1]))
+        return true;
+    return false;
+}
+
+//OPERATORS: INCREMENT
+vect2&	vect2::operator++(){
+    this->_vec[0]++;
+    this->_vec[1]++;
+    return *this;
+}
+
+vect2	vect2::operator++(int){
+    vect2 res = *this;
+    ++(*this);
+    return res;
+}
+
+vect2&	vect2::operator--(){
+    this->_vec[0]--;
+    this->_vec[1]--;
+    return *this;
+}
+
+vect2	vect2::operator--(int){
+    vect2 res = *this;
+    --(*this);
+    return res;
+}
+
+vect2& vect2::operator-(){
+    this->_vec[0] = -this->_vec[0];
+    this->_vec[1] = -this->_vec[1];
+
+    return *this;
+}
+
+vect2 operator*(int n, const vect2& obj){
+    return vect2(obj[0] * n, obj[1] * n);
 }

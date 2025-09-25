@@ -24,12 +24,22 @@ class vect2{
         vect2 operator+ (const vect2& other) const;
         vect2 operator- (const vect2& other) const;
         vect2 operator* (const vect2& other) const;
+        vect2 operator* (int n) const;
         vect2& operator+= (const vect2& other);
         vect2& operator-= (const vect2& other);
         vect2& operator*= (const vect2& other);
+        vect2& operator*= (int n);
 
         bool operator== (const vect2& other);
         bool operator!= (const vect2& other);
+
+        vect2&	operator++();
+		vect2	operator++(int);
+		vect2&	operator--();
+		vect2	operator--(int);
+
+        vect2& operator- ();
 };
 
 std::ostream& operator<< (std::ostream& output, const vect2& obj);
+vect2 operator*(int n, const vect2& obj);
