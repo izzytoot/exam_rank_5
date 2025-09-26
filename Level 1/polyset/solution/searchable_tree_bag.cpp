@@ -15,11 +15,14 @@ searchable_tree_bag::~searchable_tree_bag(){}
 
 bool searchable_tree_bag::has(int n) const{
     node* curr = tree;
-    if (curr->value == n)
-        return true;
-    else if (n > curr->value)
-        curr = curr->l;
-    else
-        curr = curr->r;
+    
+    while(curr){
+        if (curr->value == n)
+            return true;
+        else if (curr->value > n)
+            curr = curr->l;
+        else
+            curr = curr->r;
+    }
     return false;
 }

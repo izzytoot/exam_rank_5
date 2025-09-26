@@ -19,7 +19,7 @@ int main(int ac, char **av)
 	a->print();
 	for (int i = 1; i < ac; i++)
 	{
-		std::cout << t->has(atoi(av[i])) << std::endl;
+		std::cout << t->has(atoi(av[i])) << std::endl;;
 		std::cout << a->has(atoi(av[i])) << std::endl;
 		std::cout << t->has(atoi(av[i]) - 1) << std::endl;
 		std::cout << a->has(atoi(av[i]) - 1) << std::endl;
@@ -41,6 +41,46 @@ int main(int ac, char **av)
 	sa.get_bag().print();
 	st.print();
 	sa.clear();
- 	int arr[] = {1, 2, 3, 4,};
+ 	int arr[] = {1, 2, 3, 4};
 	sa.insert(arr, 4);
+	sa.print();
 }
+
+/*
+./a.out 5 4 5 3 2 1 
+
+should output:
+
+1 2 3 4 5 5 
+5 4 5 3 2 1 
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+0
+0
+
+5 4 3 2 1 
+5 4 3 2 1 
+5 4 3 2 1 
+1 2 3 4 
+
+*/

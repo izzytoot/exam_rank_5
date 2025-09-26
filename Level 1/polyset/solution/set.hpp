@@ -2,14 +2,14 @@
 
 #include "searchable_bag.hpp"
 
-class set
-{
+class set{
 	private:
 		searchable_bag&	bag;
+		
 	public:
 		set(searchable_bag& _bag);
-		set(const set& copy);
-		// set&	operator=(const set& copy);
+		set(const set& src);
+		set&	operator=(const set& src);
 		~set();
 
 		void	insert (int value);

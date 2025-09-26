@@ -1,9 +1,6 @@
 #ifndef EXAM_ASSIGNMENTS_BAG_HPP
 #define EXAM_ASSIGNMENTS_BAG_HPP
 
-#include <iomanip>
-#include <iostream>
-
 class bag
 {
 public:
