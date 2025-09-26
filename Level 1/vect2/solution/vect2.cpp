@@ -1,79 +1,78 @@
-
 #include "vect2.hpp"
 
-
-vect2::vect2(){
+/*** BASICS ***/
+vect2::vect2() {
     _vec.push_back(0);
     _vec.push_back(0);
-//    std::cout << "def constr" << std::endl;
 }
 
 vect2::vect2(int x, int y){
     _vec.push_back(x);
     _vec.push_back(y);
-//    std::cout << "constr with value" << std::endl;
 }
 
-vect2::vect2(const vect2& src): _vec(src._vec){
-//    std::cout << "copy constr" << std::endl;
-}
+vect2::vect2(const vect2& src) : _vec(src._vec) {}
 
 vect2& vect2::operator= (const vect2& src){
     if (this != &src)
         this->_vec = src._vec;
-//    std::cout << "copy assign" << std::endl;
     return *this;
 }
 
-vect2::~vect2(){
-//   std::cout << "destruct" << std::endl;
-}
+vect2::~vect2(){}
 
-// OPERATORS: ACCESS AND PRINTING
-int& vect2::operator[] (unsigned int index){
-    if (index > this->_vec.size()){
-        throw std::runtime_error("Error - index out of bounds");
-    }
-    else
+/*** OPERATOR [] ***/
+int& vect2::operator[] (int index){
+    if (index == 0 || index == 1)
         return this->_vec[index];
-}
-
-int vect2::operator[] (unsigned int index) const{
-    if (index > this->_vec.size()){
-        throw std::runtime_error("Error - index out of bounds");
-    }
     else
+        throw std::runtime_error("index out of bounds\n");
+}
+
+int vect2::operator[] (int index) const{
+    if (index == 0 || index == 1)
         return this->_vec[index];
+    else
+        throw std::runtime_error("index out of bounds\n");
 }
 
-std::ostream& operator<< (std::ostream& output, const vect2& obj){
-    output << "{" << obj[0] << ", " << obj[1] << "}" << std::endl;
-    return output;
+/*** INCREMENT & DECREMENT OPERATORS ***/
+
+vect2& vect2::operator++ (){ //pre
+    this->_vec[0]++;
+    this->_vec[1]++;
+    return *this;
 }
 
-// OPERATORS: +, -, *, +=, -=, *=
+vect2 vect2::operator++ (int){
+    vect2 tmp = *this;
+    ++(*this);
+    return tmp;
+}
+
+vect2& vect2::operator-- (){ //pre
+    this->_vec[0]--;
+    this->_vec[1]--;
+    return *this;
+}
+
+vect2 vect2::operator-- (int){
+    vect2 tmp = *this;
+    --(*this);
+    return tmp;
+}
+
+/*** OPERATORS +, -, *, +=, -=, *= ***/
 vect2& vect2::operator+= (const vect2& other){
     this->_vec[0] += other._vec[0];
     this->_vec[1] += other._vec[1];
     return *this;
 }
 
-vect2 vect2::operator+ (const vect2& other) const{
-    int x = this->_vec[0] + other._vec[0];
-    int y = this->_vec[1] + other._vec[1];
-    return vect2(x, y);
-}
-
 vect2& vect2::operator-= (const vect2& other){
     this->_vec[0] -= other._vec[0];
-    this->_vec[1] -= other._vec[1];   
+    this->_vec[1] -= other._vec[1];
     return *this;
-}
-
-vect2 vect2::operator- (const vect2& other) const{
-    int x = this->_vec[0] - other._vec[0];
-    int y = this->_vec[1] - other._vec[1];
-    return vect2(x, y);
 }
 
 vect2& vect2::operator*= (const vect2& other){
@@ -86,66 +85,75 @@ vect2& vect2::operator*= (int n){
     this->_vec[0] *= n;
     this->_vec[1] *= n;
     return *this;
+} 
+
+vect2 vect2::operator+ (const vect2& other) const{
+    vect2 tmp = *this;
+
+    tmp._vec[0] += other._vec[0];
+    tmp._vec[1] += other._vec[1];
+    
+    return tmp;
+}
+
+vect2 vect2::operator- (const vect2& other) const{
+    vect2 tmp = *this;
+
+    tmp._vec[0] -= other._vec[0];
+    tmp._vec[1] -= other._vec[1];
+    
+    return tmp;
 }
 
 vect2 vect2::operator* (const vect2& other) const{
-    int x = this->_vec[0] * other._vec[0];
-    int y = this->_vec[1] * other._vec[1];
-    return vect2(x, y);
+    vect2 tmp = *this;
+
+    tmp._vec[0] *= other._vec[0];
+    tmp._vec[1] *= other._vec[1];
+    
+    return tmp;
 }
 
 vect2 vect2::operator* (int n) const{
-    int x = this->_vec[0] * n;
-    int y = this->_vec[1] * n;
-    return vect2(x, y);
+    vect2 tmp = *this;
+
+    tmp._vec[0] *= n;
+    tmp._vec[1] *= n;
+    
+    return tmp;
 }
 
-// OPERATORS: ==, !=
+vect2 vect2::operator- () const{
+    vect2 tmp = *this;
+
+    tmp._vec[0] = -(tmp._vec[0]);
+    tmp._vec[1] = -(tmp._vec[1]);
+
+    return tmp;
+}
+
+/*** COMPARISON ***/
 
 bool vect2::operator== (const vect2& other){
-    if ((this->_vec[0] == other._vec[0]) && (this->_vec[1] == other._vec[1]))
+    if ((this->_vec[0] == other._vec[0]) && this->_vec[1] == other._vec[1])
         return true;
     return false;
 }
 
 bool vect2::operator!= (const vect2& other){
-    if ((this->_vec[0] != other._vec[0]) && (this->_vec[1] != other._vec[1]))
+    if ((this->_vec[0] != other._vec[0]) && this->_vec[1] != other._vec[1])
         return true;
     return false;
 }
 
-//OPERATORS: INCREMENT
-vect2&	vect2::operator++(){
-    this->_vec[0]++;
-    this->_vec[1]++;
-    return *this;
+/*** OUTSIDE CLASS ***/
+
+std::ostream& operator<< (std::ostream& output, const vect2& obj){
+    output << "{" << obj[0] << ", " << obj[1] << "}" << std::endl;
+    return output;
 }
 
-vect2	vect2::operator++(int){
-    vect2 res = *this;
-    ++(*this);
-    return res;
-}
-
-vect2&	vect2::operator--(){
-    this->_vec[0]--;
-    this->_vec[1]--;
-    return *this;
-}
-
-vect2	vect2::operator--(int){
-    vect2 res = *this;
-    --(*this);
-    return res;
-}
-
-vect2& vect2::operator-(){
-    this->_vec[0] = -this->_vec[0];
-    this->_vec[1] = -this->_vec[1];
-
-    return *this;
-}
-
-vect2 operator*(int n, const vect2& obj){
-    return vect2(obj[0] * n, obj[1] * n);
+vect2 operator* (int n, const vect2& obj){
+    vect2 newVec(obj[0] * n, obj[1] * n);
+    return newVec;
 }
