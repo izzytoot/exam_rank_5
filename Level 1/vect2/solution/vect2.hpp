@@ -36,7 +36,6 @@ class vect2{
         vect2 operator* (const vect2& other) const;
         vect2 operator* (int n) const;
         vect2 operator- () const;
-        vect2 operator+ () const;
 
         bool operator== (const vect2& other);
         bool operator!= (const vect2& other);
