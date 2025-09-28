@@ -21,7 +21,6 @@ class bigint{
         ~bigint();
 
         std::string getDigits() const;
-        std::string toString(const bigint& obj) const;
 
         bool operator <(const bigint& other) const;
         bool operator >(const bigint& other) const;
