@@ -9,7 +9,6 @@
 class bigint{
     private:
         std::string _digits;
-        void remove_zeros();
 
     public:
         bigint();
@@ -46,10 +45,11 @@ class bigint{
         bigint& operator >>=(unsigned int n);
 
         //bigint shifts
-        bigint operator <<(const bigint& n) const;
-        bigint operator >>(const bigint& n) const;
-        bigint& operator <<=(const bigint& n);
-        bigint& operator >>=(const bigint& n);
+        bigint operator <<(const bigint& other) const;
+        bigint operator >>(const bigint& other) const;
+        bigint& operator <<=(const bigint& other);
+        bigint& operator >>=(const bigint& other);
 };
 
 std::ostream& operator <<(std::ostream& output, const bigint& obj);
+int toInt(const bigint& obj);

@@ -25,11 +25,6 @@ std::ostream& operator <<(std::ostream& output, const bigint& obj){
 bigint::~bigint() {};
 
 //UTILS
-void bigint::remove_zeros(){
-    while(_digits.size() > 1 && _digits[0] == '0')
-        _digits.erase(0, 1);
-}
-
 std::string bigint::getDigits() const{
     return this->_digits;
 }
@@ -138,26 +133,26 @@ bigint& bigint::operator >>=(unsigned int n){
 
 //BIGINT SHIFT
 
-static int toInt(const bigint& b){
-    std::string str = b.toString(b);
+int toInt(const bigint& obj){
+    std::string str = obj.toString(obj);
     if (str.size() > 9)
         return INT_MAX;
     return std::stoi(str);
 }
 
-bigint bigint::operator <<(const bigint& n) const{
-    return *this << toInt(n);
+bigint bigint::operator <<(const bigint& other) const{
+    return *this << toInt(other);
 }
 
-bigint bigint::operator >>(const bigint& n) const{
-    return *this >> toInt(n);
+bigint bigint::operator >>(const bigint& other) const{
+    return *this >> toInt(other);
 }
 
-bigint& bigint::operator <<=(const bigint& n){
-    return *this <<= toInt(n);
+bigint& bigint::operator <<=(const bigint& other){
+    return *this <<= toInt(other);
 }
 
-bigint& bigint::operator >>=(const bigint& n){
-    return *this >>= toInt(n);
+bigint& bigint::operator >>=(const bigint& other){
+    return *this >>= toInt(other);
 }
 
