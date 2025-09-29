@@ -41,7 +41,7 @@ int main(int ac, char **av)
 	sa.get_bag().print();
 	st.print();
 	sa.clear();
- 	int arr[] = {1, 2, 3, 4,};
+ 	int arr[] = {1, 2, 3, 4};
 	sa.insert(arr, 4);
 	sa.print();
 }
