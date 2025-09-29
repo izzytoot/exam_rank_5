@@ -74,5 +74,7 @@
 		"queue": "cpp",
 		"set": "cpp",
 		"stack": "cpp"
+		"variant": "cpp",
+		"set": "cpp"
 	}
 }
