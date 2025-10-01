@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main (int ac, char** av){
+int main(int ac, char** av){
     if (ac != 4)
         return 1;
     
@@ -16,13 +16,13 @@ int main (int ac, char** av){
     int y = 1;
     int x = 1;
     int pen = 0;
-    char c;
     int grid[2][height + 2][width + 2];
+    char c;
 
-    for (int board = 0; board < 2; board++){
-        for (int y = 0; y < (height + 2); y++){
-            for (int x = 0; x < (width + 2); x++){
-                grid[board][y][x] = 0;
+    for (int b = 0; b < 2; b++){
+        for (int y = 0; y < height + 2; y++){
+            for (int x = 0; x < width + 2; x++){
+                grid[b][y][x] = 0;
             }
         }
     }
@@ -47,13 +47,13 @@ int main (int ac, char** av){
         int next = (it + 1) % 2;
 
         for (int y = 1; y <= height; y++){
-            for(int x = 1; x <= width; x++){
+            for (int x = 1; x <= width; x++){
                 int nbours = 0;
 
-                for (int dy = -1; dy < 2; dy++){
-                    for (int dx = -1; dx < 2; dx++){
-                        if (dy != 0 || dx != 0)
-                            nbours += grid[curr][y + dy][x + dx];
+                for (int by = -1; by < 2; by++){
+                    for (int bx = -1; bx < 2; bx++){
+                        if (by != 0 || bx != 0)
+                            nbours += grid[curr][by + y][bx + x];
                     }
                 }
                 if (grid[curr][y][x])
@@ -64,10 +64,10 @@ int main (int ac, char** av){
         }
     }
 
-    int fboard = iterations % 2;
+    int fb = iterations % 2;
     for (int y = 1; y <= height; y++){
         for (int x = 1; x <= width; x++){
-            if (grid[fboard][y][x])
+            if (grid[fb][y][x])
                 putchar('O');
             else
                 putchar(' ');

@@ -7,6 +7,7 @@ class set{
 		searchable_bag&	bag;
 		
 	public:
+		set() = delete;
 		set(searchable_bag& _bag);
 		set(const set& src);
 		set&	operator=(const set& src);
